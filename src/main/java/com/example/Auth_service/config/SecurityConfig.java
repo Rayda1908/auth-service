@@ -21,22 +21,15 @@ public class SecurityConfig{
 
     //// Configures endpoint security rules and authentication methods
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http ) throws Exception {
-        // Disable CSRF & frame options so the H2 web console can load in the browser
-        // h2 : a fake temporary database that runs inside my computer's RAM
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-           .csrf(csrf -> csrf.disable())
-                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-
-                // Define access rules for URL paths
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll() // Allow public access to H2 UI
-                        .requestMatchers("/auth/**").permitAll() // allows a new users to submit their new username and password to /auth/register, create their account, and then log into the protected endpoints.
-                        .requestMatchers("/admin/**").hasRole("ADMIN")   // Only users with ROLE_ADMIN
-                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // Both roles allowed
-                        .anyRequest().authenticated()                   // All other requests require login
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                        .anyRequest().authenticated()
                 )
-                // Enable default HTTP Basic and standard login form
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
 
