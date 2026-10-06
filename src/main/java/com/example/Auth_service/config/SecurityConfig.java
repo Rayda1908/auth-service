@@ -31,6 +31,7 @@ public class SecurityConfig{
                 // Define access rules for URL paths
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll() // Allow public access to H2 UI
+                        .requestMatchers("/auth/**").permitAll() // allows a new users to submit their new username and password to /auth/register, create their account, and then log into the protected endpoints.
                         .requestMatchers("/admin/**").hasRole("ADMIN")   // Only users with ROLE_ADMIN
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // Both roles allowed
                         .anyRequest().authenticated()                   // All other requests require login
