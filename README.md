@@ -1,6 +1,5 @@
-Auth Service — Stateless Authentication & RBAC Microservice
 
-A production-style authentication and authorization microservice built with Spring Boot 4, Spring Security, and PostgreSQL, utilizing JWT (JSON Web Tokens) for stateless session management.
+ A stateless, containerized authentication microservice built in Spring Boot and PostgreSQL that handles user registration, credential hashing with BCrypt, role-based authorization, and JWT token issuance and validation.
 
 ---
 
