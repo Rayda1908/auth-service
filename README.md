@@ -23,6 +23,14 @@
 - Build Tool: Apache Maven
 
 ---
+ API Endpoints: 
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `POST` | `/auth/register` | Public | Register a new user (`ROLE_USER`) with payload validation |
+| `POST` | `/auth/login` | Public | Authenticate credentials and receive a signed JWT |
+| `GET` | `/user/profile` | `ROLE_USER`, `ROLE_ADMIN` | Retrieve user profile (Bearer token required) |
+| `GET` | `/admin/dashboard` | `ROLE_ADMIN` | Elevated administration panel |
 
 Getting Started
 
